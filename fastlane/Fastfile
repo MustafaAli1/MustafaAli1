@@ -32,7 +32,7 @@ platform :android do
      gradle(
           #assemble
           task: "bundle",
-          build_type: options[:build_type],
+          build_type: "release",
           properties: {
             "android.injected.signing.store.file" => ENV['KEYSTORE_FILE'],
             "android.injected.signing.store.password" => ENV['STORE_PASSWORD'],
