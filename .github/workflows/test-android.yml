@@ -68,10 +68,10 @@ jobs:
         versionName: ${{env.version_name}}
 
     - name: Build & deploy Android release
-      run: bundle exec fastlane android beta
+      run: bundle exec fastlane android test
 
       env:
-        KEYSTORE_FILE: ${{ steps.android_keystore.outputs.filePath }
+        KEYSTORE_FILE: ${{ secrets.KEYSTORE_FILE }}
         STORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
         KEY_ALIAS: ${{ secrets.KEY_ALIAS}}
         KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}

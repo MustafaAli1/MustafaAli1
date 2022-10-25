@@ -23,24 +23,24 @@ platform :android do
 
   desc "Submit a new Beta Build to Crashlytics Beta"
   lane :beta do
-       gradle(task: "clean bundleRelease")
-       upload_to_play_store(track: 'beta', release_status: 'draft')
+     #gradle(task: "clean bundleRelease")
+    # upload_to_play_store(track: 'beta', release_status: 'draft')
   
     # sh "your_script.sh"
     # You can also use other beta testing services here
 
-#      gradle(
-#           #assemble
-#           task: "bundle",
-#           build_type: options[:build_type],
-#           properties: {
-#             "android.injected.signing.store.file" => ENV['KEYSTORE_FILE'],
-#             "android.injected.signing.store.password" => ENV['STORE_PASSWORD'],
-#             "android.injected.signing.key.alias" => ENV['KEY_ALIAS'],
-#             "android.injected.signing.key.password" => ENV['KEY_PASSWORD'],
-#            }
-#         )
-#         upload_to_play_store(track:'release')
+     gradle(
+          #assemble
+          task: "bundle",
+          build_type: options[:build_type],
+          properties: {
+            "android.injected.signing.store.file" => ENV['KEYSTORE_FILE'],
+            "android.injected.signing.store.password" => ENV['STORE_PASSWORD'],
+            "android.injected.signing.key.alias" => ENV['KEY_ALIAS'],
+            "android.injected.signing.key.password" => ENV['KEY_PASSWORD'],
+           }
+        )
+        upload_to_play_store(track:'release')
   end
 
   desc "Deploy a new version to the Google Play"
