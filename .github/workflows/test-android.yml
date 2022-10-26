@@ -61,11 +61,11 @@ jobs:
         keyStorePassword: ${{ secrets.KEYSTORE_PASSWORD }}
         keyPassword: ${{ secrets.KEY_PASSWORD }}
 
-      - name: Upload build artifacts
-        uses: actions/upload-artifact@v2
-        with:
-         name: assets
-         path: |
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: assets
+        path: |
                 ${{ github.workspace }}/app/build/outputs/bundle/release/app-release.aab
           
 #  #   STEP 2 : Upload the Artifact
