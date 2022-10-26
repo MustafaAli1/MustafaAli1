@@ -64,7 +64,7 @@ jobs:
     - name: Upload build artifacts
       uses: actions/upload-artifact@v2
       with:
-        name: assets
+        name:  Build Artifacts
         path: |
                 ${{ github.workspace }}/app/build/outputs/bundle/release/app-release.aab
           
