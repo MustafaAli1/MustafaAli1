@@ -60,16 +60,25 @@ jobs:
         alias: ${{ secrets.KEY_ALIAS }}
         keyStorePassword: ${{ secrets.KEYSTORE_PASSWORD }}
         keyPassword: ${{ secrets.KEY_PASSWORD }}
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v2
+        with:
+         name: assets
+         path: |
+                ${{ github.workspace }}/app/build/outputs/bundle/release/app-release.aab
           
-  #   STEP 2 : Upload the Artifact
-  upload:
-    needs: [ build ]
-     - name: Upload build artifacts
-       uses: actions/upload-artifact@v2
-      with:
-        name: assets
-        path: |
-            ${{ github.workspace }}/app/build/outputs/bundle/release
+#  #   STEP 2 : Upload the Artifact
+#
+#  upload:
+#    needs: [ build ]
+#    runs-on: ubuntu-latest
+#    name: Upload build artifacts
+#    uses: actions/upload-artifact@v2
+#      with:
+#        name: assets
+#        path: |
+#            ${{ github.workspace }}/app/build/outputs/bundle/release
 
 
   # Step 3 : Release to playstore
