@@ -48,11 +48,24 @@ jobs:
     - name: Make gradlew executable
       run: chmod +x ./gradlew
 
+#    - name: Sign app bundle
+#      run: |
+#          jarsigner -keystore app/*.jks \
+#          -storepass ${{ secrets.KEYSTORE_PASSWORD }} -keypass ${{ secrets.KEY_PASSWORD }} \
+#          app/build/outputs/bundle/release/app-release.aab ${{ secrets.KEY_ALIAS }}
+
     - name: Sign app bundle
-      run: |
-          jarsigner -keystore app/*.jks \
-          -storepass ${{ secrets.KEYSTORE_PASSWORD }} -keypass ${{ secrets.KEY_PASSWORD }} \
-          app/build/outputs/bundle/release/app-release.aab ${{ secrets.KEY_ALIAS }}
+      uses: r0adkll/sign-android-release@v1
+      id: sign_app
+      with:
+            releaseDirectory: app/build/outputs/bundle/release
+            signingKeyBase64: ${{ secrets.KEYSTORE_FILE }}
+            alias: ${{ secrets.KEY_ALIAS }}
+            keyStorePassword: ${{ secrets.KEYSTORE_PASSWORD }}
+            keyPassword: ${{ secrets.KEY_PASSWORD }}
+#          env:
+#            # override default build-tools version (29.0.3) -- optional
+#            BUILD_TOOLS_VERSION: "30.0.2"
           
   #   STEP 2 : Upload the Artifact
   upload:
