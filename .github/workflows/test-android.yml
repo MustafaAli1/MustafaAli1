@@ -83,7 +83,7 @@ jobs:
 
   # Step 3 : Release to playstore
   deploy:
-    needs: [ upload ]
+    needs: [ build ]
     name: Create release on Playstore
     runs-on: self-hosted
     steps:
