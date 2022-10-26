@@ -28,28 +28,28 @@ jobs:
         bundler-cache: true
 
     - name: Set up JDK
-        uses: actions/setup-java@v2
-        with:
+      uses: actions/setup-java@v2
+      with:
           distribution: 'zulu'
           java-version: '11'
 
     - name: Setup Android SDK
-        uses: android-actions/setup-android@v2
+      uses: android-actions/setup-android@v2
 
     - uses: actions/cache@v2
-        with:
-          path: |
-            ~/.gradle/caches
-            ~/.gradle/wrapper
-          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
-          restore-keys: |
+      with:
+      path: |
+        ~/.gradle/caches
+        ~/.gradle/wrapper
+      key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+      restore-keys: |
             ${{ runner.os }}-gradle-
 
     - name: Make gradlew executable
-            run: chmod +x ./gradlew
+      run: chmod +x ./gradlew
 
     - name: Sign app bundle
-        run: |
+      run: |
           jarsigner -keystore app/*.jks \
           -storepass ${{ secrets.KEYSTORE_PASSWORD }} -keypass ${{ secrets.KEY_PASSWORD }} \
           app/build/outputs/bundle/release/app-release.aab ${{ secrets.KEY_ALIAS }}
