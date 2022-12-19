@@ -32,12 +32,12 @@ jobs:
   stagging:
     name: "staging"
     if: inputs.environment == 'stagging'
-    step:
+    steps:
     run: echo stagging
   production:
     name: "production"
     if: inputs.environment == 'production'
-    step:
+    steps:
     run: echo production
 
 #  build:
