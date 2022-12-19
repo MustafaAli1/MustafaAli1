@@ -16,7 +16,7 @@ on:
         equired: true
         options:
           - internal
-          - stagging
+          - staging
           - production
 
   # Allows you to run this workflow manually from the Actions tab
@@ -26,10 +26,23 @@ on:
 jobs:
   internal:
     runs-on: ubuntu-latest
+    if: inputs.environment == 'internal'
+    steps:
+      - name: build
+        run: echo internal
+  staging:
+    runs-on: ubuntu-latest
     if: inputs.environment == 'staging'
     steps:
       - name: build
-        run: echo internal 
+        run: echo staging
+  production:
+    runs-on: ubuntu-latest
+    if: inputs.environment == 'production'
+    steps:
+      - name: build
+        run: echo production
+
 
 
 #  build:
