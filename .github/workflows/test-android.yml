@@ -24,19 +24,20 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
+  runs-on: ubuntu-latest
   steps:
-   internal:
-     name: "internal"
-     if: inputs.environment == 'internal'
-     run: echo Internal
-   stagging:
-     name: "staging"
-     if: inputs.environment == 'stagging'
-     run: echo stagging
-   production:
-     name: "production"
-     if: inputs.environment == 'production'
-     run: echo production
+  internal:
+    name: "internal"
+    if: inputs.environment == 'internal'
+    run: echo Internal
+  stagging:
+    name: "staging"
+    if: inputs.environment == 'stagging'
+    run: echo stagging
+  production:
+    name: "production"
+    if: inputs.environment == 'production'
+    run: echo production
 
 #  build:
 #    name: Setup Environment and build
