@@ -24,21 +24,19 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  internal:
-    name: "internal"
-    if: inputs.environment == 'internal'
-    steps:
-    run: echo Internal
-  stagging:
-    name: "staging"
-    if: inputs.environment == 'stagging'
-    steps:
-    run: echo stagging
-  production:
-    name: "production"
-    if: inputs.environment == 'production'
-    steps:
-    run: echo production
+  steps:
+   internal:
+     name: "internal"
+     if: inputs.environment == 'internal'
+     run: echo Internal
+   stagging:
+     name: "staging"
+     if: inputs.environment == 'stagging'
+     run: echo stagging
+   production:
+     name: "production"
+     if: inputs.environment == 'production'
+     run: echo production
 
 #  build:
 #    name: Setup Environment and build
