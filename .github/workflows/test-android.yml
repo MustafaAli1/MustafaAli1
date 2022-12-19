@@ -24,7 +24,6 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-
     internal:
     runs-on: ubuntu-latest
     if: inputs.environment == 'internal'
