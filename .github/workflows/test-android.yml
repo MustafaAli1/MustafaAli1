@@ -84,21 +84,21 @@ jobs:
 
 
 #  # Step 3 : Release to playstore
-#  deploy:
-#    needs: [ build ]
-#    name: Create release on Playstore
-#    runs-on: ubuntu-latest
-#    steps:
-#      - name: Create service_account.json
-#        run: echo '${{ secrets.SERVICE_ACCOUNT_JSON }}' > service_account.json
-#
-#      - name: Deploy to Play Store
-#        uses: r0adkll/upload-google-play@v1.0.15
-#        with:
-#          serviceAccountJson: service_account.json
-#          packageName: ${{ github.event.inputs.app_id }}
-#          releaseFiles: ${{ github.workspace }}/app/build/outputs/bundle/release/app-release.aab  # app/build/outputs/bundle/release/*.aab
-#          track: internal  # production
-#          whatsNewDirectory: whatsnew/
-#          mappingFile: app/build/outputs/mapping/release/mapping.txt
-#          inAppUpdatePriority: 5
+  deploy:
+    needs: [ build ]
+    name: Create release on Playstore
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create service_account.json
+        run: echo '${{ secrets.SERVICE_ACCOUNT_JSON }}' > service_account.json
+
+      - name: Deploy to Play Store
+        uses: r0adkll/upload-google-play@v1.0.15
+        with:
+          serviceAccountJson: service_account.json
+          packageName: ${{ github.event.inputs.app_id }}
+          releaseFiles: ${{ github.workspace }}/app/build/outputs/bundle/release/app-release.aab  # app/build/outputs/bundle/release/*.aab
+          track: internal  # production
+          whatsNewDirectory: whatsnew/
+          mappingFile: app/build/outputs/mapping/release/mapping.txt
+          inAppUpdatePriority: 5
