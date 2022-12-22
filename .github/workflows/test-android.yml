@@ -73,12 +73,6 @@ jobs:
     - name: Create service_account.json
       run: echo '${{ secrets.SERVICE_ACCOUNT_JSON }}' > service_account.json
 
-    - id: 'auth'
-      name: Authenticate to Google playstore
-      uses: google-github-actions/auth@v1
-      with:
-        credentials_json: ${{ secrets.SERVICE_ACCOUNT_JSON }}
-
     - name: Deploy to Play Store
       uses: r0adkll/upload-google-play@v1.0.15
       with:
