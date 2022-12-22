@@ -77,7 +77,7 @@ jobs:
       uses: r0adkll/upload-google-play@v1.0.15
       with:
         serviceAccountJson: service_account.json
-        serviceAccountJsonPlainText: ${{ github.workspace }}/playstore-service-account.json
+        #serviceAccountJsonPlainText: ${{ github.workspace }}/playstore-service-account.json
         packageName: "com.test.fastlanedemo"
         releaseFiles: ${{ github.workspace }}/app/build/outputs/bundle/release/*.aab  # app/build/outputs/bundle/release/*.aab
         track: internal  # production
