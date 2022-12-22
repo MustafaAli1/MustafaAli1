@@ -71,21 +71,18 @@ jobs:
                 ${{ github.workspace }}/app/build/outputs/bundle/release/app-release.aab
 
     - name: Create service_account.json
-     run : |
-      echo "$SERVICE_ACCOUNT_JSON" > service_account.json.b64
-      base64 -d -i play_config.json.b64 > service_account.json
-      env:
-        SERVICE_ACCOUNT_JSON: ${{ secrets.SERVICE_ACCOUNT_JSON }}
+      run: echo '${{ secrets.SERVICE_ACCOUNT_JSON }}' > service_account.json
 
     - name: Deploy to Play Store
       uses: r0adkll/upload-google-play@v1.0.15
       with:
-        serviceAccountJson: service_account.json
+        serviceAccountJsonPlainText: service_account.json
         #serviceAccountJsonPlainText: ${{ secrets.SERVICE_ACCOUNT_JSON }}
           #          packageName: ${{ github.event.inputs.app_id }}
         packageName: "com.test.fastlanedemo"
         releaseFiles: ${{ github.workspace }}/app/build/outputs/bundle/release/*.aab  # app/build/outputs/bundle/release/*.aab
-        track: internal  # production
+          #          releaseFiles: app/build/outputs/bundle/release/*.aab
+        track: beta  # production
         #whatsNewDirectory: whatsnew/
         #mappingFile: app/build/outputs/mapping/release/mapping.txt
 
