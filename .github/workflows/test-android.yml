@@ -81,6 +81,7 @@ jobs:
         packageName: "com.test.fastlanedemo"
         releaseFiles: ${{ github.workspace }}/app/build/outputs/bundle/release/*.aab  # app/build/outputs/bundle/release/*.aab
         track: internal  # production
+        
         inAppUpdatePriority: 5
  
 
