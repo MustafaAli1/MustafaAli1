@@ -82,7 +82,7 @@ jobs:
         serviceAccountJson: service_account.json
         #serviceAccountJsonPlainText: ${{ github.workspace }}/app/build/playstore-service-account.json
         packageName: "com.test.fastlanedemo"
-        releaseFiles: app/build/outputs/bundle/release/*.aab # ${{ github.workspace }}/app/build/outputs/bundle/release/*.aab
+        releaseFiles: app/build/outputs/bundle/release/app-release.aab.aab # ${{ github.workspace }}/app/build/outputs/bundle/release/*.aab
         track: production  # production
         status: completed
         userFraction: 0.33
