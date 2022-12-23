@@ -77,14 +77,13 @@ jobs:
       run: echo '${{ secrets.SERVICE_ACCOUNT_JSON }}' > service_account.json
 
     - name: Deploy to Play Store
-      uses: r0adkll/upload-google-play@v1
+      uses: r0adkll/upload-google-play@v1.0.15
       with:
-        serviceAccountJson: service_account.jsonbase64
-
+        serviceAccountJson: service_account.json
         #serviceAccountJsonPlainText: ${{ github.workspace }}/app/build/playstore-service-account.json
         packageName: "com.test.fastlanedemo"
         releaseFiles: app/build/outputs/bundle/release/app-release.aab # ${{ github.workspace }}/app/build/outputs/bundle/release/*.aab
-        track: production  # production
+        track: internal  # production
         status: completed
         userFraction: 0.33
         inAppUpdatePriority: 2
