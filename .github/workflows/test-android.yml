@@ -85,7 +85,8 @@ jobs:
         releaseFiles: ${{ github.workspace }}/app/build/outputs/bundle/release/*.aab  # app/build/outputs/bundle/release/*.aab
         track: internal  # production
         status: draft
-        inAppUpdatePriority: 5
+        userFraction: 1.0
+        inAppUpdatePriority: 2
  
 
 #  #   STEP 2 : Upload the Artifact
