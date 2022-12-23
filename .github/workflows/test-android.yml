@@ -86,6 +86,7 @@ jobs:
         track: internal  # production
         status: draft
         userFraction: 0.99
+        
         inAppUpdatePriority: 2
  
 
