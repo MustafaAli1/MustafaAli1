@@ -82,9 +82,10 @@ jobs:
         serviceAccountJsonPlainText: ${{ github.workspace }}/app/build/playstore-service-account.json
         #serviceAccountJsonPlainText: ${{ github.workspace }}/playstore-service-account.json
         packageName: "com.test.fastlanedemo"
+        releaseName: "v2.0"
         releaseFiles: ${{ github.workspace }}/app/build/outputs/bundle/release/*.aab  # app/build/outputs/bundle/release/*.aab
         track: internal  # production
-        status: draft
+        status: completed
         userFraction: 0.99
         inAppUpdatePriority: 2
  
