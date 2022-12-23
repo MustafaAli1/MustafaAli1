@@ -85,7 +85,7 @@ jobs:
         releaseFiles: ${{ github.workspace }}/app/build/outputs/bundle/release/*.aab  # app/build/outputs/bundle/release/*.aab
         track: internal  # production
         status: draft
-        userFraction: 1.0
+        userFraction: 0.99
         inAppUpdatePriority: 2
  
 
