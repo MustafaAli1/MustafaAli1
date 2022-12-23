@@ -73,8 +73,8 @@ jobs:
 #                ${{ github.workspace }}/app/build/outputs/bundle/release/app-release.aab
 
 
-    - name: Create service_account.json
-      run: echo '${{ secrets.SERVICE_ACCOUNT_JSON }}' > service_account.json
+#    - name: Create service_account.json
+#      run: echo '${{ secrets.SERVICE_ACCOUNT_JSON }}' > service_account.json
 
     - name: Deploy to Play Store
       uses: r0adkll/upload-google-play@v1.0.15
