@@ -69,8 +69,9 @@ jobs:
       with:
         name:  Build Artifacts
         path: |
-                ${{ github.workspace }}/app/build/outputs/bundle/release/app-release.aab
-          
+          app/build/outputs/bundle/release/app-release.aab
+#                ${{ github.workspace }}/app/build/outputs/bundle/release/app-release.aab
+
 
     - name: Create service_account.json
       run: echo '${{ secrets.SERVICE_ACCOUNT_JSON }}' > service_account.json
@@ -81,7 +82,7 @@ jobs:
         serviceAccountJson: service_account.json
         #serviceAccountJsonPlainText: ${{ github.workspace }}/app/build/playstore-service-account.json
         packageName: "com.test.fastlanedemo"
-        releaseFiles: ${{ github.workspace }}/app/build/outputs/bundle/release/*.aab  # app/build/outputs/bundle/release/*.aab
+        releaseFiles: app/build/outputs/bundle/release/*.aab # ${{ github.workspace }}/app/build/outputs/bundle/release/*.aab
         track: production  # production
         status: completed
         userFraction: 0.33
