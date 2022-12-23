@@ -69,19 +69,22 @@ jobs:
         name:  Build Artifacts
         path: |
                 ${{ github.workspace }}/app/build/outputs/bundle/release/app-release.aab
+          
+    - name: Build & deploy Android release
+      run: bundle exec fastlane android deploy
 
-    - name: Create service_account.json
-      run: echo '${{ secrets.SERVICE_ACCOUNT_JSON }}' > service_account.json
-
-    - name: Deploy to Play Store
-      uses: r0adkll/upload-google-play@v1.0.15
-      with:
-        serviceAccountJson: service_account.json
-        #serviceAccountJsonPlainText: ${{ github.workspace }}/playstore-service-account.json
-        packageName: "com.test.fastlanedemo"
-        releaseFiles: ${{ github.workspace }}/app/build/outputs/bundle/release/*.aab  # app/build/outputs/bundle/release/*.aab
-        track: internal  # production
-        inAppUpdatePriority: 5
+#    - name: Create service_account.json
+#      run: echo '${{ secrets.SERVICE_ACCOUNT_JSON }}' > service_account.json
+#
+#    - name: Deploy to Play Store
+#      uses: r0adkll/upload-google-play@v1.0.15
+#      with:
+#        serviceAccountJson: service_account.json
+#        #serviceAccountJsonPlainText: ${{ github.workspace }}/playstore-service-account.json
+#        packageName: "com.test.fastlanedemo"
+#        releaseFiles: ${{ github.workspace }}/app/build/outputs/bundle/release/*.aab  # app/build/outputs/bundle/release/*.aab
+#        track: internal  # production
+#        inAppUpdatePriority: 5
  
 
 #  #   STEP 2 : Upload the Artifact
