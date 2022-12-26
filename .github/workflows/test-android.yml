@@ -84,6 +84,8 @@ jobs:
         releaseFiles: app/build/outputs/bundle/release/app-release.aab # ${{ github.workspace }}/app/build/outputs/bundle/release/*.aab
         track: production  # production
         status: completed
+        versionCode: 5
+        versionName: 1.5
         userFraction: 0.33
         inAppUpdatePriority: 2
  
