@@ -80,11 +80,10 @@ jobs:
 
   notifications:
     runs-on: ubuntu-latest
+    name: Notify Teams channel
     steps:
-      -name: Notify Teams channel
-       uses:  toko-bifrost/ms-teams-deploy-card@master
-        if: always()
-        with:
-          github-token: ${{ github.token }}
-          webhook-uri: ${{ secrets.TEAM_WEBHOOK }}
-          
+      -uses:  toko-bifrost/ms-teams-deploy-card@master
+       if: always()
+       with:
+         github-token: ${{ github.token }}
+         webhook-uri: ${{ secrets.TEAM_WEBHOOK }}
