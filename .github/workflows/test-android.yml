@@ -83,7 +83,7 @@ jobs:
 #      if: success() || failure()
 #      run: echo "${{ job.status }}" > notifications
       with:
-        webhook_url: ${{ secrets.CHANNEL_WEBHOOK }}
+        webhook_url: ${{ secrets.TEAM_WEBHOOK }}
         summary: "${{ job.status }}"
 
     #    name: Upload build artifacts
