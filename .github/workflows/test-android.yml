@@ -82,7 +82,7 @@ jobs:
     runs-on: ubuntu-latest
     name: Notify Teams channel
     steps:
-      -uses:  toko-bifrost/ms-teams-deploy-card@master
+      - uses:  toko-bifrost/ms-teams-deploy-card@master
        if: always()
        with:
          github-token: ${{ github.token }}
