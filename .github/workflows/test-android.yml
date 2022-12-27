@@ -85,7 +85,7 @@ jobs:
 #      run: echo "${{ job.status }}" > notifications
       with:
         webhook_url: ${{ secrets.TEAM_WEBHOOK }}
-        summary: "${{ job.status }}"
+        message: notifications.txt
 
     #    name: Upload build artifacts
   #    uses: actions/upload-artifact@v2
