@@ -78,50 +78,13 @@ jobs:
 #        userFraction: 0.33
 #        inAppUpdatePriority: 2
 
-    - name: Notify Teams channel
-      uses: skitionek/notify-microsoft-teams@master
-#      if: success() || failure()
-#      run: echo "${{ job.status }}" > notifications
-      with:
-        webhook_url: ${{ secrets.TEAM_WEBHOOK }}
-        overwrite: "${{ job.status }}"
-
-    #    name: Upload build artifacts
-  #    uses: actions/upload-artifact@v2
-
-
-
-#  #   STEP 2 : Upload the Artifact
-#
-#  upload:
-#    needs: [ build ]
-#    runs-on: ubuntu-latest
-#    name: Upload build artifacts
-#    uses: actions/upload-artifact@v2
-#      with:
-#        name: assets
-#        path: |
-#            ${{ github.workspace }}/app/build/outputs/bundle/release
-
-
-#  # Step 3 : Release to playstore
-#  deploy:
-#    needs: [ build ]
-#    name: Create release on Playstore
-#    runs-on: ubuntu-latest
-#    steps:
-#      - name: Create service_account.json
-#        run: echo '${{ secrets.SERVICE_ACCOUNT_JSON }}' > service_account.json
-#
-#      - name: Deploy to Play Store
-#        uses: r0adkll/upload-google-play@v1.0.15
-#        with:
-#          serviceAccountJson: service_account.json
-##          packageName: ${{ github.event.inputs.app_id }}
-#          packageName: "com.test.fastlanedemo"
-#          releaseFiles: ${{ github.workspace }}/app/build/outputs/bundle/release/*.aab  # app/build/outputs/bundle/release/*.aab
-##          releaseFiles: app/build/outputs/bundle/release/*.aab
-#          track: internal  # production
-#          whatsNewDirectory: whatsnew/
-#          mappingFile: app/build/outputs/mapping/release/mapping.txt
-#          inAppUpdatePriority: 5
+  notifications:
+    runs-on: ubuntu-latest
+    steps:
+      -name: Notify Teams channel
+       uses:  toko-bifrost/ms-teams-deploy-card@master
+        if: always()
+        with:
+          github-token: ${{ github.token }}
+          webhook-uri: ${{ secrets.TEAM_WEBHOOK }}
+          
