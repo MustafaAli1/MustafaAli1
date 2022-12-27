@@ -33,42 +33,41 @@ jobs:
           distribution: 'zulu'
           java-version: '11'
 
-    - name: Setup Android SDK
-      uses: android-actions/setup-android@v2
-
-    - uses: actions/cache@v2
-      with:
-        path: |
-          ~/.gradle/caches
-          ~/.gradle/wrapper
-        key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
-        restore-keys: |
-          ${{ runner.os }}-gradle-
-
-    - name: Make gradlew executable
-      run: chmod +x ./gradlew
-
-    - name: Generate app bundle
-      run: ./gradlew app:bundleRelease --stacktrace
-
-    - name: Sign app bundle
-      id: sign
-      uses: r0adkll/sign-android-release@v1
-      with:
-        releaseDirectory: app/build/outputs/bundle/release
-        signingKeyBase64: ${{ secrets.KEYSTORE_FILE }}
-        alias: ${{ secrets.KEY_ALIAS }}
-        keyStorePassword: ${{ secrets.KEYSTORE_PASSWORD }}
-        keyPassword: ${{ secrets.KEY_PASSWORD }}
-
-    - name: Upload build artifacts
-      uses: actions/upload-artifact@v2
-      with:
-        name:  Build Artifacts
-        run: echo ${{ job.status }} > notifications.txt
-        path: |
-          app/build/outputs/bundle/release/app-release.aab
-
+#    - name: Setup Android SDK
+#      uses: android-actions/setup-android@v2
+#
+#    - uses: actions/cache@v2
+#      with:
+#        path: |
+#          ~/.gradle/caches
+#          ~/.gradle/wrapper
+#        key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+#        restore-keys: |
+#          ${{ runner.os }}-gradle-
+#
+#    - name: Make gradlew executable
+#      run: chmod +x ./gradlew
+#
+#    - name: Generate app bundle
+#      run: ./gradlew app:bundleRelease --stacktrace
+#
+#    - name: Sign app bundle
+#      id: sign
+#      uses: r0adkll/sign-android-release@v1
+#      with:
+#        releaseDirectory: app/build/outputs/bundle/release
+#        signingKeyBase64: ${{ secrets.KEYSTORE_FILE }}
+#        alias: ${{ secrets.KEY_ALIAS }}
+#        keyStorePassword: ${{ secrets.KEYSTORE_PASSWORD }}
+#        keyPassword: ${{ secrets.KEY_PASSWORD }}
+#
+#    - name: Upload build artifacts
+#      uses: actions/upload-artifact@v2
+#      with:
+#        name:  Build Artifacts
+#        path: |
+#          app/build/outputs/bundle/release/app-release.aab
+#
 #    - name: Deploy to Play Store
 #      uses: r0adkll/upload-google-play@v1.0.15
 #      with:
@@ -85,7 +84,7 @@ jobs:
 #      run: echo "${{ job.status }}" > notifications
       with:
         webhook_url: ${{ secrets.TEAM_WEBHOOK }}
-        overwrite: "{title: `${notifications.txt}`}"
+        overwrite: "{${ job.status }}"
 
     #    name: Upload build artifacts
   #    uses: actions/upload-artifact@v2
