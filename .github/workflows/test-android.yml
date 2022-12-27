@@ -80,12 +80,13 @@ jobs:
 #        inAppUpdatePriority: 2
 
     - name: Notify Teams channel
-      uses: skitionek/notify-microsoft-teams@master
+      uses: jdcargile/ms-teams-notification@v1.3
 #      if: success() || failure()
 #      run: echo "${{ job.status }}" > notifications
       with:
-        webhook_url: ${{ secrets.TEAM_WEBHOOK }}
-        overwrite: notifications.txt
+        ms-teams-webhook-uri: ${{ secrets.TEAM_WEBHOOK }}
+        notification-summary: notifications.txt
+        notification-color: 17a2b8
 
     #    name: Upload build artifacts
   #    uses: actions/upload-artifact@v2
