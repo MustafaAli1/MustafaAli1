@@ -80,11 +80,11 @@ jobs:
 
     - name: Notify Teams channel
       uses: skitionek/notify-microsoft-teams@master
-      if: success() || failure()
-      run: echo "${{ job.status }}" > notifications
+#      if: success() || failure()
+#      run: echo "${{ job.status }}" > notifications
       with:
         webhook_url: ${{ secrets.CHANNEL_WEBHOOK }}
-        summary: notifications
+        summary: "${{ job.status }}"
 
     #    name: Upload build artifacts
   #    uses: actions/upload-artifact@v2
