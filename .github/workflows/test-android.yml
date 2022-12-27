@@ -65,6 +65,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name:  Build Artifacts
+        run: echo ${{ job.status }} > notifications.txt
         path: |
           app/build/outputs/bundle/release/app-release.aab
 
