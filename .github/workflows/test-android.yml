@@ -83,7 +83,7 @@ jobs:
     name: Notify Teams channel
     steps:
       - uses:  toko-bifrost/ms-teams-deploy-card@master
-       if: always()
-       with:
-         github-token: ${{ github.token }}
-         webhook-uri: ${{ secrets.TEAM_WEBHOOK }}
+        if: always()
+        with:
+          github-token: ${{ github.token }}
+          webhook-uri: ${{ secrets.TEAM_WEBHOOK }}
