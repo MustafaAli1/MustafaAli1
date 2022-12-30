@@ -18,7 +18,7 @@ jobs:
   producton:
     name: Setup Environment and build
     runs-on: ubuntu-latest
-    if:${{ github.repository.name ==  ENVIROMNET_DEPLOYMENT }}
+    if: ${{ github.repository.name ==  env.ENVIROMNET_DEPLOYMENT }}
     steps:
     - uses: actions/checkout@v2
 
@@ -130,7 +130,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name:
-        run: echo ${{ ENVIROMNET_DEPLOYMENT }}
+        run: echo ${{ env.ENVIROMNET_DEPLOYMENT }}
 
 
 
