@@ -82,7 +82,7 @@ jobs:
 
   staging:
     needs: [ producton ]
-    if: always()
+    if: ${{  always() || github.repository.name ==  'ENVIROMNET_STAGES' }}
     runs-on: ubuntu-latest
     steps:
       - name:
