@@ -87,7 +87,7 @@ jobs:
     steps:
       - name:
         #run: echo "$ENVIROMNET_DEPLOYMENT" github.repository.name
-        run: echo "${{ github.repository.name }}"
+        run: echo "${{ github.ref_name }}"
 
 
 
