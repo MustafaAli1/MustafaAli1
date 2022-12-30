@@ -7,17 +7,18 @@ on:
   # Triggers the workflow on push or pull request events but only for the "master" branch
   push:
     branches: [ "master" ]
-  pull_request:
-    branches: [ "master" ]
+env:
+  ENVIROMNET_DEPLOYMENT: interlal # production,staging
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  build:
+  producton:
     name: Setup Environment and build
     runs-on: ubuntu-latest
+    if:${{ github.repository.name ==  ENVIROMNET_DEPLOYMENT }}
     steps:
     - uses: actions/checkout@v2
 
@@ -78,12 +79,60 @@ jobs:
         userFraction: 0.33
         inAppUpdatePriority: 2
 
-  production:
-    needs: [build]
+  interal:
     runs-on: ubuntu-latest
     steps:
       - name:
-        run: echo "helo production"
+      - name: Set up JDK
+          uses: actions/setup-java@v2
+          with:
+            distribution: 'zulu'
+            java-version: '11'
+
+            - name: Setup Android SDK
+              uses: android-actions/setup-android@v2
+
+            - uses: actions/cache@v2
+              with:
+                path: |
+                  ~/.gradle/caches
+                  ~/.gradle/wrapper
+                key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+                restore-keys: |
+                  ${{ runner.os }}-gradle-
+
+            - name: Make gradlew executable
+              run: chmod +x ./gradlew
+
+            - name: Generate app bundle
+              run: ./gradlew app:bundleRelease --stacktrace
+
+            - name: Sign app bundle
+              id: sign
+              uses: r0adkll/sign-android-release@v1
+              with:
+                releaseDirectory: app/build/outputs/bundle/release
+                signingKeyBase64: ${{ secrets.KEYSTORE_FILE }}
+                alias: ${{ secrets.KEY_ALIAS }}
+                keyStorePassword: ${{ secrets.KEYSTORE_PASSWORD }}
+                keyPassword: ${{ secrets.KEY_PASSWORD }}
+
+            - name: Upload build artifacts
+              uses: actions/upload-artifact@v2
+              with:
+                name: Build Artifacts
+                path: |
+                  app/build/outputs/bundle/release/app-release.aab
+
+  staging:
+    needs: [ build ]
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - name:
+        run: echo ${{ ENVIROMNET_DEPLOYMENT }}
+
+
 
 #  notifications:
 #    need: [build]
