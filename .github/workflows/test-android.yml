@@ -49,8 +49,8 @@ jobs:
     - name: Make gradlew executable
       run: chmod +x ./gradlew
 
-    - name: Generate app bundle
-      run: ./gradlew app:bundleRelease --stacktrace
+    - name: Generate app bundle     #assembleRelease bundleRelease
+      run: ./gradlew app:assembleRelease --stacktrace
 
     - name: Sign app bundle
       id: sign
