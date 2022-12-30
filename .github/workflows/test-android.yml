@@ -51,8 +51,9 @@ jobs:
     - name: Generate app bundle
       run: ./gradlew app:bundleRelease --stacktrace
 
-  producton:
-    need: [build]
+  production:
+
+    needs: [build]
     runs-on: ubuntu-latest
     steps:
     - name: Sign app bundle
