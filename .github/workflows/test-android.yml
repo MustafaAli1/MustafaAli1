@@ -18,7 +18,7 @@ jobs:
   producton:
     name: Setup Environment and build
     runs-on: ubuntu-latest
-    if: ${{ github.repository.name ==  'ENVIROMNET_STAGES' }}
+    #if: ${{ github.repository.name ==  'ENVIROMNET_STAGES' }}
     steps:
     - uses: actions/checkout@v2
 
@@ -75,19 +75,19 @@ jobs:
         serviceAccountJsonPlainText: ${{ secrets.SERVICE_ACCOUNT_JSON }}
         packageName: "com.test.fastlanedemo"
         releaseFiles: app/build/outputs/bundle/release/app-release.aab # ${{ github.workspace }}/app/build/outputs/bundle/release/*.aab
-        track: production  # production
+        track: internal  # production
         userFraction: 0.33
         inAppUpdatePriority: 2
 
-  staging:
-    needs: [ producton ]
-    if: always() && ${{ github.repository.name ==  'ENVIROMNET_STAGES' }}
-   # if: ${{ github.repository.name ==  'ENVIROMNET_STAGES' }}
-    runs-on: ubuntu-latest
-    steps:
-      - name:
-        #run: echo "$ENVIROMNET_DEPLOYMENT" github.repository.name
-        run: echo "${{ github.ref_name }}"
+#  staging:
+#    needs: [ producton ]
+#    if: always() && ${{ github.repository.name ==  'ENVIROMNET_STAGES' }}
+#   # if: ${{ github.repository.name ==  'ENVIROMNET_STAGES' }}
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name:
+#        #run: echo "$ENVIROMNET_DEPLOYMENT" github.repository.name
+#        run: echo "${{ github.ref_name }}"
 
 
 
