@@ -81,8 +81,8 @@ jobs:
 
   staging:
     needs: [ producton ]
-    #if: ${{  always() || github.repository.name ==  'ENVIROMNET_STAGES' }}
-    if: ${{ github.repository.name ==  'ENVIROMNET_STAGES' }}
+    if: always() && ${{ github.repository.name ==  'ENVIROMNET_STAGES' }}
+   # if: ${{ github.repository.name ==  'ENVIROMNET_STAGES' }}
     runs-on: ubuntu-latest
     steps:
       - name:
