@@ -81,7 +81,7 @@ jobs:
         inAppUpdatePriority: 2
 
   staging:
-    needs: [ build ]
+    needs: [ producton ]
     if: always()
     runs-on: ubuntu-latest
     steps:
