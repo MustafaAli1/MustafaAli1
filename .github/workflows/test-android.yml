@@ -9,6 +9,7 @@ on:
     branches: [ "master" ]
 env:
   ENVIROMNET_DEPLOYMENT: internal # production,staging
+  run: echo "$ENVIROMNET_DEPLOYMENT" > ENVIROMNET_STAGES
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -18,7 +19,7 @@ jobs:
   producton:
     name: Setup Environment and build
     runs-on: ubuntu-latest
-    if: ${{ github.repository.name ==  "$ENVIROMNET_DEPLOYMENT" }}
+    if: ${{ github.repository.name ==  'ENVIROMNET_STAGES' }}
     steps:
     - uses: actions/checkout@v2
 
