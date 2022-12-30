@@ -69,7 +69,7 @@ jobs:
           uses: actions/upload-artifact@v2
           with:
             name: Build Artifacts
-              path: |
+            path: |
                 app/build/outputs/bundle/release/app-release.aab
 
         - name: Deploy to Play Store
