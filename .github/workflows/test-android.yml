@@ -56,14 +56,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Sign app bundle
-        id: sign
-        uses: r0adkll/sign-android-release@v1
-        with:
-          releaseDirectory: app/build/outputs/bundle/release
-          signingKeyBase64: ${{ secrets.KEYSTORE_FILE }}
-           alias: ${{ secrets.KEY_ALIAS }}
-           keyStorePassword: ${{ secrets.KEYSTORE_PASSWORD }}
-           keyPassword: ${{ secrets.KEY_PASSWORD }}
+      id: sign
+      uses: r0adkll/sign-android-release@v1
+      with:
+        releaseDirectory: app/build/outputs/bundle/release
+        signingKeyBase64: ${{ secrets.KEYSTORE_FILE }}
+        alias: ${{ secrets.KEY_ALIAS }}
+        keyStorePassword: ${{ secrets.KEYSTORE_PASSWORD }}
+        keyPassword: ${{ secrets.KEY_PASSWORD }}
 
     - name: Upload build artifacts
       uses: actions/upload-artifact@v2
@@ -74,7 +74,7 @@ jobs:
 
     - name: Deploy to Play Store
       uses: r0adkll/upload-google-play@v1.0.15
-       with:
+      with:
          serviceAccountJsonPlainText: ${{ secrets.SERVICE_ACCOUNT_JSON }}
          packageName: "com.test.fastlanedemo"
          releaseFiles: app/build/outputs/bundle/release/app-release.aab # ${{ github.workspace }}/app/build/outputs/bundle/release/*.aab
