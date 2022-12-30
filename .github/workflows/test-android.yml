@@ -85,7 +85,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name:
-        run: echo $ENVIROMNET_DEPLOYMENT
+        run: echo "$ENVIROMNET_DEPLOYMENT"
 
 
 
