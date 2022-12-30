@@ -67,8 +67,8 @@ jobs:
       with:
         name:  Build Artifacts
         path: |
-  #        app/build/outputs/bundle/release/app-release.aab
-           app/build/outputs/apk/release/app-release-unsigned.apk
+          app/build/outputs/apk/release/app-release-unsigned.apk
+      #        app/build/outputs/bundle/release/app-release.aab
 
 
     - name: Deploy to Play Store
