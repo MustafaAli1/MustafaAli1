@@ -50,7 +50,7 @@ jobs:
       run: chmod +x ./gradlew
 
     - name: Generate app bundle     #assembleRelease, bundleRelease ,assembleDebug
-      run: ./gradlew app:assembleRelease --stacktrace
+      run: ./gradlew app:bundleRelease --stacktrace
 
     - name: Sign app bundle
       id: sign
