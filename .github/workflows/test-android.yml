@@ -49,15 +49,15 @@ jobs:
     - name: Make gradlew executable
       run: chmod +x ./gradlew
 
-    - name: Generate app bundle     #assembleRelease bundleRelease
+    - name: Generate app bundle     #assembleRelease, bundleRelease ,assembleDebug
       run: ./gradlew app:assembleRelease --stacktrace
 
     - name: Sign app bundle
       id: sign
       uses: r0adkll/sign-android-release@v1
       with:
-        releaseDirectory: app/build/outputs/apk/release
-        #releaseDirectory: app/build/outputs/bundle/release
+        releaseDirectory: app/build/outputs/bundle/release
+        #releaseDirectory: app/build/outputs/apk/release
         signingKeyBase64: ${{ secrets.KEYSTORE_FILE }}
         alias: ${{ secrets.KEY_ALIAS }}
         keyStorePassword: ${{ secrets.KEYSTORE_PASSWORD }}
@@ -68,20 +68,19 @@ jobs:
       with:
         name:  Build Artifacts
         path: |
-          app/build/outputs/apk/release/app-release-unsigned.apk
-      #        app/build/outputs/bundle/release/app-release.aab
-
+          app/build/outputs/bundle/release/app-release.aab
+      #    app/build/outputs/apk/release/app-release-unsigned.apk
 
     - name: Deploy to Play Store
       uses: r0adkll/upload-google-play@v1.0.15
       with:
         serviceAccountJsonPlainText: ${{ secrets.SERVICE_ACCOUNT_JSON }}
         packageName: "com.test.fastlanedemo"
-       # releaseFiles: app/build/outputs/bundle/release/app-release.aab # ${{ github.workspace }}/app/build/outputs/bundle/release/*.aab
-        releaseFiles: app/build/outputs/apk/release/app-release-unsigned.apk # ${{ github.workspace }}/app/build/outputs/bundle/release/*.aab
+        releaseFiles: app/build/outputs/bundle/release/app-release.aab # ${{ github.workspace }}/app/build/outputs/bundle/release/*.aab
         track: internal  # production
         userFraction: 0.33
         inAppUpdatePriority: 2
+
 
 #  staging:
 #    needs: [ producton ]
