@@ -78,7 +78,7 @@ jobs:
         packageName: "com.test.fastlanedemo"
         releaseFiles: app/build/outputs/bundle/release/app-release.aab # ${{ github.workspace }}/app/build/outputs/bundle/release/*.aab
         track: internal   # production
-        userFraction: 0.33
+        userFraction: 0.99
         inAppUpdatePriority: 2
 
 
