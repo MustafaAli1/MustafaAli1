@@ -83,11 +83,11 @@ jobs:
 
       - name: Send a Notification
         uses: jdcargile/ms-teams-notification@v1.3
-          with:
-            github-token: ${{ github.token }}
-            ms-teams-webhook-uri: ${{ secrets.TEAM_WEBHOOK }}
-            notification-summary: "Github Action Build Number ${{ github.run_number }} Completed for ${{ github.repository }} and the outcome is  ${{ needs.production.result }}."
-            notification-color: FFFFFF
+        with:
+          github-token: ${{ github.token }}
+          ms-teams-webhook-uri: ${{ secrets.TEAM_WEBHOOK }}
+          notification-summary: "Github Action Build Number ${{ github.run_number }} Completed for ${{ github.repository }} and the outcome is  ${{ needs.production.result }}."
+          notification-color: FFFFFF
 
 
 #  notifications:
