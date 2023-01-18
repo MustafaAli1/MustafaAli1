@@ -15,7 +15,7 @@ env:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  producton:
+  production:
     name: Setup Environment and build
     runs-on: ubuntu-latest
     #if: ${{ github.repository.name ==  'ENVIROMNET_STAGES' }}
@@ -71,36 +71,25 @@ jobs:
           app/build/outputs/bundle/release/app-release.aab
       #    app/build/outputs/apk/release/app-release-unsigned.apk
 
-    - name: Deploy to Play Store
-      uses: r0adkll/upload-google-play@v1.0.15
-      with:
-        serviceAccountJsonPlainText: ${{ secrets.SERVICE_ACCOUNT_JSON }}
-        packageName: "com.test.fastlanedemo"
-        releaseFiles: app/build/outputs/bundle/release/app-release.aab # ${{ github.workspace }}/app/build/outputs/bundle/release/*.aab
-        track: internal   # production
-        userFraction: 0.99
-        inAppUpdatePriority: 2
+#    - name: Deploy to Play Store
+#      uses: r0adkll/upload-google-play@v1.0.15
+#      with:
+#        serviceAccountJsonPlainText: ${{ secrets.SERVICE_ACCOUNT_JSON }}
+#        packageName: "com.test.fastlanedemo"
+#        releaseFiles: app/build/outputs/bundle/release/app-release.aab # ${{ github.workspace }}/app/build/outputs/bundle/release/*.aab
+#        track: internal   # production
+#        #userFraction: 0.99
+#        inAppUpdatePriority: 2
 
 
-#  staging:
-#    needs: [ producton ]
-#    if: always() && ${{ github.repository.name ==  'ENVIROMNET_STAGES' }}
-#   # if: ${{ github.repository.name ==  'ENVIROMNET_STAGES' }}
-#    runs-on: ubuntu-latest
-#    steps:
-#      - name:
-#        #run: echo "$ENVIROMNET_DEPLOYMENT" github.repository.name
-#        run: echo "${{ github.ref_name }}"
-
-
-
-#  notifications:
-#    need: [build]
-#    runs-on: ubuntu-latest
-#    name: Notify Teams channel
-#    steps:
-#      - uses:  toko-bifrost/ms-teams-deploy-card@master
-#        if: always()
-#        with:
-#          github-token: ${{ github.token }}
-#          webhook-uri: ${{ secrets.TEAM_WEBHOOK }}
+  notifications:
+    needs: [production]
+    runs-on: ubuntu-latest
+    name: Send a Notification
+    steps:
+      - uses:  thechetantalwar/teams-notify@v2
+        id: notify
+        if: always()
+        with:
+          teams_webhook_url: ${{ secrets.TEAM_WEBHOOK }}
+          message: "Github Action Build Number ${{ github.run_number }} Completed for ${{ github.repository }} and the outcome is  ${{ needs.production.result }}."
