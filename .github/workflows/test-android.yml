@@ -88,8 +88,12 @@ jobs:
     runs-on: ubuntu-latest
     name: Send a Notification
     steps:
-      - uses:  thechetantalwar/teams-notify@v2
+      - uses: skitionek/notify-microsoft-teams@master
         id: notify
         with:
-          teams_webhook_url: ${{ secrets.TEAM_WEBHOOK }}
-          message: "Github Action Build Number ${{ github.run_number }} Completed for ${{ github.repository }} and the outcome is  ${{ needs.production.result }}."
+          webhook_url: ${{ secrets.TEAM_WEBHOOK }}
+          needs: ${{ toJson(production) }}
+          job: ${{ toJson(job) }}
+          steps: ${{ toJson(steps) }}
+          dry_run: True
+          #message: "Github Action Build Number ${{ github.run_number }} Completed for ${{ github.repository }} and the outcome is  ${{ needs.production.result }}."
