@@ -86,10 +86,10 @@ jobs:
     needs: [production]
     if: always()
     runs-on: ubuntu-latest
+    name: Send a Notification
     steps:
-    - name: Send a Notification
-        uses:  thechetantalwar/teams-notify@v2
+      - uses:  thechetantalwar/teams-notify@v2
         id: notify
         with:
-        teams_webhook_url: ${{ secrets.TEAM_WEBHOOK }}
-        message: "Github Action Build Number ${{ github.run_number }} Completed for ${{ github.repository }} and the outcome is  ${{ needs.production.result }}."
+          teams_webhook_url: ${{ secrets.TEAM_WEBHOOK }}
+          message: "Github Action Build Number ${{ github.run_number }} Completed for ${{ github.repository }} and the outcome is  ${{ needs.production.result }}."
