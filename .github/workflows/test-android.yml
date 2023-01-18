@@ -81,24 +81,17 @@ jobs:
       #        #userFraction: 0.99
       #        inAppUpdatePriority: 2
 
+
+  notifications:
+    needs: [production]
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
       - name: Send a Notification
         uses: jdcargile/ms-teams-notification@v1.3
         with:
           github-token: ${{ github.token }}
           ms-teams-webhook-uri: ${{ secrets.TEAM_WEBHOOK }}
-          notification-summary: "Github Action Build Number ${{ github.run_number }} Completed for ${{ github.repository }} and the outcome is  ${{ toJSON(production) }}."
+          notification-summary: "Github Action Build Number ${{ github.run_number }} Completed for ${{ github.repository }} and the outcome is  ${{ needs.production.result }}."
 
-
-#  notifications:
-#    needs: [production]
-#    if: always()
-#    runs-on: ubuntu-latest
-#    name: Send a Notification
-#    steps:
-#      - uses: jdcargile/ms-teams-notification@v1.3
-#        id: notify
-#        with:
-#          github-token: ${{ github.token }}
-#          ms-teams-webhook-uri: ${{ secrets.TEAM_WEBHOOK }}
-#          notification-summary: "Github Action Build Number ${{ github.run_number }} Completed for ${{ github.repository }} and the outcome is  ${{ needs.production.result }}."
-#          notification-color: FFFFFF
