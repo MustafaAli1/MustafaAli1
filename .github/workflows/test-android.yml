@@ -88,9 +88,10 @@ jobs:
     runs-on: ubuntu-latest
     name: Send a Notification
     steps:
-      - uses: thechetantalwar/teams-notify@v2
+      - uses: jdcargile/ms-teams-notification@v1.3
         id: notify
         with:
-          teams_webhook_url: ${{ secrets.TEAM_WEBHOOK }}
-          message: "Github Action Build Number ${{ github.run_number }} Completed for ${{ github.repository }} and the outcome is  ${{ needs.production.result }}."
-          dry_run: True
+          github-token: ${{ github.token }}
+          ms-teams-webhook-uri: ${{ secrets.TEAM_WEBHOOK }}
+          notification-summary: "Github Action Build Number ${{ github.run_number }} Completed for ${{ github.repository }} and the outcome is  ${{ needs.production.result }}."
+          notification-color: FFFFFF
