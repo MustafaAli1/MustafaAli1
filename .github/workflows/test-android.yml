@@ -85,6 +85,7 @@ jobs:
   notifications:
     needs: [production]
     if: always()
+    
     runs-on: ubuntu-latest
     name: Send a Notification
     steps:
