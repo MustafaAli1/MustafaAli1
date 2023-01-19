@@ -89,11 +89,12 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Send a Notification
-        uses: jdcargile/ms-teams-notification@v1.3
+        #uses: jdcargile/ms-teams-notification@v1.3
+        uses: toko-bifrost/ms-teams-deploy-card@master
         with:
           github-token: ${{ github.token }}
-          ms-teams-webhook-uri: ${{ secrets.TEAM_WEBHOOK }}
+          webhook-uri: ${{ secrets.TEAM_WEBHOOK }}
           notification-summary: "Github Action Build Number ${{ github.run_number }} Completed for ${{ github.repository }} and the outcome is  ${{ needs.production.result }}."
-          notification-color: 17a2b8
+         # notification-color: 17a2b8
           timezone: Asia/Karachi
 
