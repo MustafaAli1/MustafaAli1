@@ -70,7 +70,6 @@ jobs:
             app/build/outputs/bundle/release/app-release.aab
 
       - name: Deploy to Play Store
-        id: deploy-to-store
         uses: r0adkll/upload-google-play@v1.0.15
         with:
           serviceAccountJsonPlainText: ${{ secrets.SERVICE_ACCOUNT_JSON }}
@@ -86,7 +85,7 @@ jobs:
         with:
             github-token: ${{ github.token }}
             webhook-uri: ${{ secrets.TEAM_WEBHOOK }}
-            notification-summary: "Github Action Build Number ${{ github.run_number }} Completed for ${{ github.repository }} and the outcome is  ${{ step.deploy-to-store.outputs }}."
+            notification-summary: "Github Action Build Number ${{ github.run_number }} Completed for ${{ github.repository }} and the outcome is  ${{ step.build.outputs }}."
             notification-color: 17a2b8
             timezone: Asia/Karachi
 
