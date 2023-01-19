@@ -95,6 +95,6 @@ jobs:
           github-token: ${{ github.token }}
           webhook-uri: ${{ secrets.TEAM_WEBHOOK }}
           notification-summary: "Github Action Build Number ${{ github.run_number }} Completed for ${{ github.repository }} and the outcome is  ${{ needs.production.result }}."
-         # notification-color: 17a2b8
+          notification-color: 17a2b8
           timezone: Asia/Karachi
 
