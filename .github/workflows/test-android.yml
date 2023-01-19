@@ -89,7 +89,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Send a Notification
-        #uses: jdcargile/ms-teams-notification@v1.3
         uses: toko-bifrost/ms-teams-deploy-card@master
         with:
           github-token: ${{ github.token }}
