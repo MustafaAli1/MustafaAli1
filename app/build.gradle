@@ -10,7 +10,7 @@ android {
         applicationId "com.test.fastlanedemo"
         minSdk 21
         targetSdk 32
-        versionCode 12.1
+        versionCode 13
         versionName "1.11"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
